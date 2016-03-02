@@ -1,0 +1,16 @@
+{
+  "name": "ask-the-audience",
+  "version": "1.0.0",
+  "description": "A Tutorial for Turing",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "express",
+    "websockets"
+  ],
+  "author": "",
+  "license": "MIT"
+}
