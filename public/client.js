@@ -1,25 +1,29 @@
 var socket = io();
 
-var connectionCount = document.getElementById('connection-count');
+setUpButtonListeners()
 
 socket.on('usersConnected', function(count){
-  connectionCount.innerText = 'Connected Users: ' + count;
-});
-
-var statusMessage = document.getElementById('status-message');
-
-socket.on('statusMessage', function (message) {
-  statusMessage.innerText = message;
+  updateConnected(count);
 });
 
 socket.on('voteCount', function (votes){
-  console.log(votes);
+  logVotes(votes);
 });
 
-var buttons = document.querySelectorAll('#choices button');
+function setUpButtonListeners(){
+  var buttons = document.querySelectorAll('#choices button');
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function () {
+      socket.send('voteCast', this.innerText);
+    });
+  };
+};
 
-for (var i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener('click', function () {
-    socket.send('voteCast', this.innerText);
-  });
-}
+function updateConnected(count){
+  var connectionCount = document.getElementById('connection-count');
+  connectionCount.innerText = 'Connected Users: ' + count;
+};
+
+function logVotes(votes){
+  console.log(votes);
+};
